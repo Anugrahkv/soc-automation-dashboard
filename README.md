@@ -51,4 +51,7 @@ To run this tool locally, follow these steps:
 Navigate to http://127.0.0.1:8000/automation/ in your browser.
 
 **Formal Project Documentation**
-For a deep dive into the methodology, technical challenges overcome (including OS execution policy bypasses), and the future roadmap for this tool, please review the attached formal documentation:
+For a deep dive into the methodology, technical challenges overcome (including OS execution policy bypasses), and the future roadmap for this tool, please review the attached formal documentation: 
+[SOC DASHBOARD REPORT.pdf](https://github.com/user-attachments/files/28952503/SOC.DASHBOARD.REPORT.pdf)
+
+

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOC Enrichment Dashboard</title>
+    <style>
+        /* Modern Dark Theme Color Palette */
+        :root {
+            --bg-main: #0f172a;       /* Deep slate background */
+            --bg-card: #1e293b;       /* Slightly lighter card background */
+            --text-main: #f8fafc;     /* Bright white text */
+            --text-muted: #94a3b8;    /* Subdued gray text */
+            --accent: #3b82f6;        /* Bright blue accent */
+            --accent-hover: #2563eb;  /* Darker blue for hover state */
+            --border: #334155;        /* Subtle border color */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* The Main Central Card */
+        .container {
+            background-color: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        /* Form Layout */
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.85rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
+
+        button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.85rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Results Layout */
+        .results {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .results h2 {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            text-align: center;
+            font-weight: 500;
+            line-height: 1.5;
+            /* FIX: Prevents 64-character file hashes from breaking the layout container */
+            word-break: break-all;
+            overflow-wrap: break-word;
+        }
+
+        .results strong {
+            color: var(--text-main);
+        }
+
+        /* Clean Data Rows */
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.85rem;
+            background-color: var(--bg-main);
+            margin-bottom: 0.75rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .data-label {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .data-value {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>SOC Enrichment Engine</h1>
+        <form method="POST" class="search-form">
+            {% csrf_token %}
+            <input type="text" name="ioc_input" placeholder="Enter IP Address or File Hash" required autocomplete="off">
+            <button type="submit">Analyze Threat</button>
+        </form>
+
+        {% if result %}
+            <div class="results">
+                <h2>Analysis for: <strong>{{ searched_ioc }}</strong></h2>
+                
+                {% if result.type == 'ip' %}
+                    <div class="data-row">
+                        <span class="data-label">Malicious Confidence</span>
+                        <span class="data-value">{{ result.score }}%</span>
+                    </div>
+                    
+                    <div class="data-row">
+                        <span class="data-label">Origin Country</span>
+                        <span class="data-value">{{ result.country }}</span>
+                    </div>
+                    
+                {% elif result.type == 'hash' %}
+                    <div class="data-row">
+                        <span class="data-label">Malicious Engines</span>
+                        <span class="data-value" style="color: #ef4444;">{{ result.malicious }}</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="data-label">Suspicious Engines</span>
+                        <span class="data-value" style="color: #f59e0b;">{{ result.suspicious }}</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="data-label">File Type</span>
+                        <span class="data-value">{{ result.file_type }}</span>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

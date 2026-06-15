@@ -3,8 +3,8 @@
 ## Overview
 Alert fatigue is a critical bottleneck in modern Security Operations Centers (SOC). This custom-built web application streamlines the Tier 1 Incident Response triage workflow. By automating the ingestion and enrichment of Indicators of Compromise (IOCs), analysts can instantly query external Threat Intelligence platforms and view actionable data within a unified, analyst-friendly dashboard.
 
-![Dashboard Preview](image_ae288c.png) 
-*(Note: Ensure your VirusTotal screenshot is uploaded to your repo and matches this filename)*
+<img width="1914" height="1081" alt="soc-automation-dashboard" src="https://github.com/user-attachments/assets/ac0a7b66-adb8-4529-b18a-0ab01ac1f958" />
+
 
 ## System Architecture (The 4 Core Pillars)
 This tool bridges application development with incident response, built on an n-tier web architecture using **Python** and **Django**:

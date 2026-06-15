@@ -48,5 +48,7 @@ To run this tool locally, follow these steps:
     ```bash
     python manage.py runserver
 
+Navigate to http://127.0.0.1:8000/automation/ in your browser.
+
 **Formal Project Documentation**
 For a deep dive into the methodology, technical challenges overcome (including OS execution policy bypasses), and the future roadmap for this tool, please review the attached formal documentation:

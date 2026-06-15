@@ -23,5 +23,5 @@ To run this tool locally, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/YourUsername/soc-automation-dashboard.git](https://github.com/YourUsername/soc-automation-dashboard.git)
+   git clone [https://github.com/YourUsername/soc-automation-dashboard.git](https://github.com/Anugrahkv/soc-automation-dashboard.git)
    cd soc-automation-dashboard

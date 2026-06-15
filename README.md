@@ -23,36 +23,30 @@ To run this tool locally, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/YourUsername/soc-automation-dashboard.git](https://github.com/Anugrahkv/soc-automation-dashboard.git)
+   git clone [https://github.com/Anugrahkv/soc-automation-dashboard.git](https://github.com/Anugrahkv/soc-automation-dashboard.git)
    cd soc-automation-dashboard
 
 2. **Create and activate a virtual environment:**
+   ```bash
+    python -m venv env
+    # On Windows:
+    env\Scripts\activate
+    # On macOS/Linux:
+    source env/bin/activate
 
-```bash
-python -m venv env
-# On Windows:
-env\Scripts\activate
-# On macOS/Linux:
-source env/bin/activate
-Install dependencies:
+3. **Install dependencies:**
+   ```bash
+   pip install django requests python-dotenv
 
-```bash
-pip install django requests python-dotenv
-Configure Environment Variables:
-Create a .env file in the root directory. Do not commit this file to Git. Add your API keys:
+4. **Configure Environment Variables:**
+    Create a .env file in the root directory. Do not commit this file to Git. Add your API keys:
+    ```bash
+    ABUSEIPDB_API_KEY=your_abuseipdb_key_here
+    VIRUSTOTAL_API_KEY=your_virustotal_key_here
 
-Plaintext
-ABUSEIPDB_API_KEY=your_abuseipdb_key_here
-VIRUSTOTAL_API_KEY=your_virustotal_key_here
-Run the server:
+5. **Run the server:**
+    ```bash
+    python manage.py runserver
 
-```bash
-python manage.py runserver
-Navigate to http://127.0.0.1:8000/automation/ in your browser.
-
-Formal Project Documentation
+**Formal Project Documentation**
 For a deep dive into the methodology, technical challenges overcome (including OS execution policy bypasses), and the future roadmap for this tool, please review the attached formal documentation:
-
-📄 SOC_Project_Report.pdf
-
-Developed as a portfolio piece for SOC Analyst and Security Engineering roles.
